@@ -18,3 +18,8 @@
    line-height: 1.21;
  }
 }
+
+.popup__btn-save:focus {
+  outline-width: 2px;
+  outline-color: rgba(0, 0, 0, .2);
+}
