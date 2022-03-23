@@ -3,7 +3,8 @@
   display: grid;
   grid-template: 1fr / 1fr min-content;
   align-items: baseline;
-  column-gap: 18px;
+  column-gap: 20px;
+  row-gap: 9px;
 }
 
 @media (max-width: 700px) {
