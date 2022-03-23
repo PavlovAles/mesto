@@ -6,7 +6,6 @@
 
 @media (max-width: 768px) {
   .profile__avocation {
-    margin-bottom: 14px;
     font-size: 14px;
     line-height: 1.22;
   }
