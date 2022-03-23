@@ -1,0 +1,20 @@
+.popup__btn-close {
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+  background-image: url(../../../images/btn-close.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  align-self: flex-end;
+}
+
+@media (min-width: 560px) {
+  .popup__btn-close {
+    transform: translateX(40px);
+    width: 32px;
+    height: 32px;
+  }
+}

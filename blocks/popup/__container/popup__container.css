@@ -1,0 +1,16 @@
+.popup__container {
+  position: absolute;
+  top: calc(50% - 185px);
+  left: calc(50% - 225px);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+@media (max-width: 560px) {
+  .popup__container {
+    top: calc(50% - 179px);
+    left: calc(50% - 141px);
+    gap: 16px;
+  }
+}
