@@ -2,6 +2,7 @@
   margin: auto;
   max-width: 880px;
   min-width: 320px;
+  min-height: 100vh;
   color: #fff;
   font-family: 'Inter', Arial, Helvetica, sans-serif;
   -moz-osx-font-smoothing: grayscale;
@@ -10,4 +11,6 @@
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
 }
