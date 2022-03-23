@@ -1,0 +1,12 @@
+.elements__btn-like {
+  width: 22px;
+  height: 19px;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  background-color: #fff;
+  background-image: url(../../../images/btn-like.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  align-self: center;
+}
