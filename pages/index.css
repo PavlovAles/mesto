@@ -6,11 +6,6 @@
 
 @import url(../blocks/page/page.css);
 
-@import url(../blocks/btn-hover/btn-hover.css);
-@import url(../blocks/btn-hover/_opacity/btn-hover_opacity_50.css);
-@import url(../blocks/btn-hover/_opacity/btn-hover_opacity_60.css);
-@import url(../blocks/btn-hover/_opacity/btn-hover_opacity_80.css);
-
 @import url(../blocks/header/header.css);
 @import url(../blocks/logo/logo.css);
 

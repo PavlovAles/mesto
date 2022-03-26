@@ -2,12 +2,14 @@
   margin: 0;
   font-size: 18px;
   line-height: 1.22;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 @media (max-width: 768px) {
   .profile__avocation {
     font-size: 14px;
-    line-height: 1.22;
   }
 }
 

@@ -12,23 +12,15 @@
       <header class="header">
         <img src="./images/logo.svg" alt="Логотип" class="logo" />
       </header>
-      <div class="main">
+      <main class="main">
         <section class="profile">
           <img src="./images/avatar.png" alt="Аватар" class="profile__avatar" />
           <div class="profile__info">
-            <h1 class="profile__name">
-              Жак-Ив Кусто
-            </h1>
-            <button
-              class="profile__btn-edit btn-hover btn-hover_opacity_60"
-              type="button">
-            </button>
+            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <button class="profile__btn-edit" type="button"></button>
             <p class="profile__avocation">Исследователь океана</p>
           </div>
-          <button
-            class="profile__btn-add btn-hover btn-hover_opacity_60"
-            type="button"
-          ></button>
+          <button class="profile__btn-add" type="button"></button>
         </section>
         <section class="elements">
           <ul class="elements__list">
@@ -43,7 +35,7 @@
               <div class="elements__caption">
                 <h2 class="elements__title">Карачаево-Черкесия</h2>
                 <button
-                  class="elements__btn-like elements__btn-like_active btn-hover btn-hover_opacity_50"
+                  class="elements__btn-like elements__btn-like_active"
                   type="button"
                 ></button>
               </div>
@@ -58,10 +50,7 @@
               </div>
               <div class="elements__caption">
                 <h2 class="elements__title">Гора Эльбрус</h2>
-                <button
-                  class="elements__btn-like btn-hover btn-hover_opacity_50"
-                  type="button"
-                ></button>
+                <button class="elements__btn-like" type="button"></button>
               </div>
             </li>
             <li class="elements__item">
@@ -74,10 +63,7 @@
               </div>
               <div class="elements__caption">
                 <h2 class="elements__title">Домбай</h2>
-                <button
-                  class="elements__btn-like btn-hover btn-hover_opacity_50"
-                  type="button"
-                ></button>
+                <button class="elements__btn-like" type="button"></button>
               </div>
             </li>
             <li class="elements__item">
@@ -90,10 +76,7 @@
               </div>
               <div class="elements__caption">
                 <h2 class="elements__title">Карачаево-Черкесия</h2>
-                <button
-                  class="elements__btn-like btn-hover btn-hover_opacity_50"
-                  type="button"
-                ></button>
+                <button class="elements__btn-like" type="button"></button>
               </div>
             </li>
             <li class="elements__item">
@@ -106,10 +89,7 @@
               </div>
               <div class="elements__caption">
                 <h2 class="elements__title">Домбай</h2>
-                <button
-                  class="elements__btn-like btn-hover btn-hover_opacity_50"
-                  type="button"
-                ></button>
+                <button class="elements__btn-like" type="button"></button>
               </div>
             </li>
             <li class="elements__item">
@@ -122,25 +102,19 @@
               </div>
               <div class="elements__caption">
                 <h2 class="elements__title">Гора Эльбрус</h2>
-                <button
-                  class="elements__btn-like btn-hover btn-hover_opacity_50"
-                  type="button"
-                ></button>
+                <button class="elements__btn-like" type="button"></button>
               </div>
             </li>
           </ul>
         </section>
-      </div>
+      </main>
       <footer class="footer">
-        <h2 class="footer__copyright">© 2022 Mesto Russia</h2>
+        <p class="footer__copyright">© 2022 Mesto Russia</p>
       </footer>
-      <section class="popup">
+      <div class="popup">
         <div class="popup__container">
-          <button
-            class="popup__btn-close btn-hover btn-hover_opacity_60"
-            type="button"
-          ></button>
-          <form class="popup__form">
+          <button class="popup__btn-close" type="button"></button>
+          <form name="popup-form" class="popup__form">
             <h2 class="popup__heading">Редактировать профиль</h2>
             <fieldset class="popup__input-container">
               <input
@@ -162,16 +136,11 @@
                 class="popup__form-item"
               />
             </fieldset>
-            <button
-              class="popup__btn-save btn-hover btn-hover_opacity_80"
-              type="submit"
-            >
-              Сохранить
-            </button>
+            <button class="popup__btn-save" type="submit">Сохранить</button>
           </form>
         </div>
-      </section>
+      </div>
     </div>
-    <script src="index.js"></script>
+    <script src="./scripts/index.js"></script>
   </body>
 </html>

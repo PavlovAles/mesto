@@ -1,7 +1,9 @@
 .popup {
   height: 100vh;
   display: none;
-  position: absolute;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
   top: 0;
   left: 0;
   right: 0;
