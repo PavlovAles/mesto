@@ -9,4 +9,10 @@
   background-repeat: no-repeat;
   background-position: center;
   align-self: center;
+  cursor: pointer;
+  transition: opacity .5s;
+}
+
+.elements__btn-like:hover {
+  opacity: .5;
 }

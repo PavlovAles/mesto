@@ -9,6 +9,8 @@
   background-color: #000;
   border-style: none;
   border-radius: 2px;
+  cursor: pointer;
+  transition: opacity .5s;
 }
 
 @media (max-width: 560px) {
@@ -22,4 +24,8 @@
 .popup__btn-save:focus {
   outline-width: 2px;
   outline-color: rgba(0, 0, 0, .2);
+}
+
+.popup__btn-save:hover {
+  opacity: .6;
 }

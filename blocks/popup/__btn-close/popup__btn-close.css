@@ -9,6 +9,8 @@
   background-position: center;
   background-size: contain;
   align-self: flex-end;
+  cursor: pointer;
+  transition: opacity .5s;
 }
 
 @media (min-width: 560px) {
@@ -17,4 +19,8 @@
     width: 32px;
     height: 32px;
   }
+}
+
+.popup__btn-close:hover {
+  opacity: .5;
 }
