@@ -4,6 +4,7 @@
   padding: 0;
   border: 1px solid #fff;
   box-sizing: border-box;
+  flex-shrink: 0;
   background-color: #000;
   background-image: url(../../../images/btn-edit.svg);
   background-repeat: no-repeat;
