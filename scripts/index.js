@@ -33,6 +33,7 @@ function profileFormSubmitHandler(evt) {
   togglePopup(profilePopup);
 }
 
+const placeTemplate = document.querySelector('#place-template').content;
 const placeList = document.querySelector('.elements__list');
 const placeForm = document.forms['place-form'];
 const placePopup = placeForm.parentElement.parentElement;
@@ -74,7 +75,6 @@ placeBtnAdd.addEventListener('click', () => togglePopup(placePopup));
 placeBtnClose.addEventListener('click', () => togglePopup(placePopup));
 
 function addPlace(placeName, placeSrc) {
-  const placeTemplate = document.querySelector('#place-template').content;
   const placeCard = placeTemplate.querySelector('.elements__item').cloneNode(true);
   const placeBtnDelete = placeCard.querySelector('.elements__btn-delete');
   const placeBtnLike = placeCard.querySelector('.elements__btn-like');
@@ -92,5 +92,16 @@ function addPlace(placeName, placeSrc) {
   });
 
   placeList.prepend(placeCard);
+}
+
+placeForm.addEventListener('submit', placeFormSubmitHandler);
+
+function placeFormSubmitHandler(evt) {
+  evt.preventDefault();
+
+  addPlace(placeInputName.value, placeInputSrc.value);
+  togglePopup(placePopup);
+  placeInputName.value = '';
+  placeInputSrc.value = '';
 }
 
