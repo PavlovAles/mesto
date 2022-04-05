@@ -1,34 +1,44 @@
-let profile = document.querySelector(".profile");
-let infoName = profile.querySelector(".profile__name");
-let infoAvocation = profile.querySelector(".profile__avocation");
-let btnEdit = profile.querySelector(".profile__btn-edit");
+const profile = document.querySelector('.profile');
+const profileName = profile.querySelector('.profile__name');
+const profileAvocation = profile.querySelector('.profile__avocation');
+const profileBtnEdit = profile.querySelector('.profile__btn-edit');
 
-let popup = document.querySelector(".popup");
-let popupForm = document.forms["popup-form"];
-let inputName = popup.querySelector("#name");
-let inputAvocation = popup.querySelector("#avocation");
-let btnClose = popup.querySelector(".popup__btn-close");
+const profileForm = document.forms['profile-form'];
+const profilePopup = profileForm.parentElement.parentElement;
+const profileInputName = profileForm.querySelector('#name');
+const profileInputAvocation = profileForm.querySelector('#avocation');
+const profileBtnClose = profilePopup.querySelector('.popup__btn-close');
 
-btnEdit.addEventListener("click", function () {
-  togglePopup();
+const placeForm = document.forms['place-form'];
+const placePopup = placeForm.parentElement.parentElement;
+const placeInputName = placeForm.querySelector('#place-name');
+const placeInputSrc = placeForm.querySelector('#place-src');
+const placeBtnClose = placePopup.querySelector('.popup__btn-close');
+const placeBtnAdd = document.querySelector('.profile__btn-add');
 
-  inputName.setAttribute("value", infoName.textContent.trim());
-  inputAvocation.setAttribute("value", infoAvocation.textContent.trim());
+profileBtnEdit.addEventListener('click', function () {
+  togglePopup(profilePopup);
+
+  profileInputName.setAttribute('value', profileName.textContent.trim());
+  profileInputAvocation.setAttribute('value', profileAvocation.textContent.trim());
 });
 
-popupForm.addEventListener("submit", formSubmitHandler);
+profileBtnClose.addEventListener('click', () => togglePopup(profilePopup));
 
-btnClose.addEventListener("click", togglePopup);
+profileForm.addEventListener('submit', profileFormSubmitHandler);
 
-function togglePopup() {
-  popup.classList.toggle("popup_opened")
+placeBtnAdd.addEventListener('click', () => togglePopup(placePopup));
+placeBtnClose.addEventListener('click', () => togglePopup(placePopup));
+
+function togglePopup(popup) {
+  popup.classList.toggle('popup_opened');
 }
 
-function formSubmitHandler(evt) {
+function profileFormSubmitHandler(evt) {
   evt.preventDefault();
 
-  infoName.textContent = inputName.value.trim();
-  infoAvocation.textContent = inputAvocation.value.trim();
+  profileName.textContent = profileInputName.value.trim();
+  profileAvocation.textContent = profileInputAvocation.value.trim();
 
-  togglePopup();
+  togglePopup(profilePopup);
 }

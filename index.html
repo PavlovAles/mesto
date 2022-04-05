@@ -102,7 +102,7 @@
       <div class="popup">
         <div class="popup__container">
           <button class="popup__btn-close" type="button"></button>
-          <form name="popup-form" class="popup__form">
+          <form name="profile-form" class="popup__form">
             <h2 class="popup__heading">Редактировать профиль</h2>
             <fieldset class="popup__input-container">
               <input
@@ -119,6 +119,35 @@
                 id="avocation"
                 name="avocation"
                 placeholder="Призвание"
+                required
+                autocomplete="off"
+                class="popup__form-item"
+              />
+            </fieldset>
+            <button class="popup__btn-save" type="submit">Сохранить</button>
+          </form>
+        </div>
+      </div>
+      <div class="popup">
+        <div class="popup__container">
+          <button class="popup__btn-close" type="button"></button>
+          <form name="place-form" class="popup__form">
+            <h2 class="popup__heading">Новое место</h2>
+            <fieldset class="popup__input-container">
+              <input
+                type="text"
+                id="place-name"
+                name="place-name"
+                placeholder="Название"
+                required
+                autocomplete="off"
+                class="popup__form-item"
+              />
+              <input
+                type="text"
+                id="place-src"
+                name="place-src"
+                placeholder="Ссылка на картинку"
                 required
                 autocomplete="off"
                 class="popup__form-item"
