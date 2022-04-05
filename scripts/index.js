@@ -1,7 +1,3 @@
-function togglePopup(popup) {
-  popup.classList.toggle('popup_opened');
-}
-
 const profile = document.querySelector('.profile');
 const profileName = profile.querySelector('.profile__name');
 const profileAvocation = profile.querySelector('.profile__avocation');
@@ -12,6 +8,10 @@ const profilePopup = profileForm.parentElement.parentElement;
 const profileInputName = profileForm.querySelector('#name');
 const profileInputAvocation = profileForm.querySelector('#avocation');
 const profileBtnClose = profilePopup.querySelector('.popup__btn-close');
+
+function togglePopup(popup) {
+  popup.classList.toggle('popup_opened');
+}
 
 profileBtnEdit.addEventListener('click', function () {
   togglePopup(profilePopup);
@@ -76,10 +76,21 @@ placeBtnClose.addEventListener('click', () => togglePopup(placePopup));
 function addPlace(placeName, placeSrc) {
   const placeTemplate = document.querySelector('#place-template').content;
   const placeCard = placeTemplate.querySelector('.elements__item').cloneNode(true);
+  const placeBtnDelete = placeCard.querySelector('.elements__btn-delete');
+  const placeBtnLike = placeCard.querySelector('.elements__btn-like');
 
   placeCard.querySelector('.elements__img').setAttribute('src', placeSrc);
   placeCard.querySelector('.elements__img').setAttribute('alt', placeName);
   placeCard.querySelector('.elements__title').textContent = placeName;
 
+  placeBtnDelete.addEventListener('click', function(evt) {
+    evt.target.parentElement.remove();
+  });
+
+  placeBtnLike.addEventListener('click', function(evt) {
+    evt.target.classList.toggle('elements__btn-like_active');
+  });
+
   placeList.prepend(placeCard);
 }
+
