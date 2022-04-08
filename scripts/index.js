@@ -42,6 +42,10 @@ const placeInputSrc = placeForm.querySelector('#place-src');
 const placeBtnClose = placePopup.querySelector('.popup__btn-close');
 const placeBtnAdd = document.querySelector('.profile__btn-add');
 
+const imgPopup = document.querySelector('.popup_contains_big-img');
+const imgBtnClose = imgPopup.querySelector('.popup__btn-close');
+const imgCaption = imgPopup.querySelector('.popup__img-caption');
+
 const initialCards = [
   {
     name: 'Архыз',
@@ -76,12 +80,15 @@ placeBtnClose.addEventListener('click', () => togglePopup(placePopup));
 
 function addPlace(placeName, placeSrc) {
   const placeCard = placeTemplate.querySelector('.elements__item').cloneNode(true);
+  const placeImg = placeCard.querySelector('.elements__img');
   const placeBtnDelete = placeCard.querySelector('.elements__btn-delete');
   const placeBtnLike = placeCard.querySelector('.elements__btn-like');
 
   placeCard.querySelector('.elements__img').setAttribute('src', placeSrc);
   placeCard.querySelector('.elements__img').setAttribute('alt', placeName);
   placeCard.querySelector('.elements__title').textContent = placeName;
+
+  placeImg.addEventListener('click', showBigImg);
 
   placeBtnDelete.addEventListener('click', function(evt) {
     evt.target.parentElement.remove();
@@ -92,6 +99,17 @@ function addPlace(placeName, placeSrc) {
   });
 
   placeList.prepend(placeCard);
+}
+
+imgBtnClose.addEventListener('click', () => togglePopup(imgPopup))
+
+function showBigImg(evt) {
+  togglePopup(imgPopup);
+
+  imgPopup.querySelector('.popup__img').setAttribute('src', evt.target.getAttribute('src'));
+  imgPopup.querySelector('.popup__img').setAttribute('alt', evt.target.getAttribute('alt'));
+  imgPopup.querySelector('.popup__img-caption').textContent = evt.target.getAttribute('alt');
+
 }
 
 placeForm.addEventListener('submit', placeFormSubmitHandler);

@@ -29,7 +29,7 @@
       <footer class="footer">
         <p class="footer__copyright">© 2022 Mesto Russia</p>
       </footer>
-      <div class="popup">
+      <div class="popup popup_contains_profile-form">
         <div class="popup__container">
           <button class="popup__btn-close" type="button"></button>
           <form name="profile-form" class="popup__form">
@@ -58,7 +58,7 @@
           </form>
         </div>
       </div>
-      <div class="popup">
+      <div class="popup popup__contains_place-form">
         <div class="popup__container">
           <button class="popup__btn-close" type="button"></button>
           <form name="place-form" class="popup__form">
@@ -87,11 +87,20 @@
           </form>
         </div>
       </div>
+      <div class="popup popup_contains_big-img">
+        <div class="popup__container">
+          <button class="popup__btn-close" type="button"></button>
+          <figure class="popup__figure">
+            <img src="#" alt="#" class="popup__img" />
+            <figcaption class="popup__img-caption"></figcaption>
+          </figure>
+        </div>
+      </div>
     </div>
     <template id="place-template">
       <li class="elements__item">
         <button class="elements__btn-delete" type="button"></button>
-        <img src="" alt="" class="elements__img" />
+        <img src="#" alt="#" class="elements__img" />
         <div class="elements__caption">
           <h2 class="elements__title"></h2>
           <button class="elements__btn-like" type="button"></button>
