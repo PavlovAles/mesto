@@ -42,7 +42,7 @@ const placeInputSrc = placeForm.querySelector('#place-src');
 const placeBtnClose = placePopup.querySelector('.popup__btn-close');
 const placeBtnAdd = document.querySelector('.profile__btn-add');
 
-const imgPopup = document.querySelector('.popup_contains_big-img');
+const imgPopup = document.querySelector('.popup_contains-big-img');
 const imgBtnClose = imgPopup.querySelector('.popup__btn-close');
 const imgCaption = imgPopup.querySelector('.popup__img-caption');
 
