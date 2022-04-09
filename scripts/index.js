@@ -20,7 +20,7 @@ function closePopup(popup) {
 profileBtnEdit.addEventListener('click', function () {
   profileInputName.value = profileName.textContent.trim();
   profileInputAvocation.value = profileAvocation.textContent.trim();
-  
+
   openPopup(profilePopup);
 });
 
@@ -38,7 +38,7 @@ function profileFormSubmitHandler(evt) {
 }
 
 const placeTemplate = document.querySelector('#place-template').content;
-const placeList = document.querySelector('.elements__list');
+const placesContainer = document.querySelector('.elements__list');
 const placePopup = document.querySelector('.popup_contains_place-form');
 const placeForm = placePopup.querySelector('.popup__form');
 const placeInputName = placeForm.querySelector('#place-name');
@@ -84,7 +84,7 @@ placeBtnClose.addEventListener('click', () => closePopup(placePopup));
 
 function renderPlaceCard(placeName, placeSrc) {
   const placeCard = preparePlaceCard(placeName, placeSrc);
-  placeList.prepend(placeCard);
+  placesContainer.prepend(placeCard);
 }
 
 function preparePlaceCard(placeName, placeSrc) {
