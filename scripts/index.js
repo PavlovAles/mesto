@@ -93,8 +93,8 @@ function preparePlaceCard(placeName, placeSrc) {
   const placeBtnDelete = placeCard.querySelector('.elements__btn-delete');
   const placeBtnLike = placeCard.querySelector('.elements__btn-like');
 
-  placeCard.querySelector('.elements__img').setAttribute('src', placeSrc);
-  placeCard.querySelector('.elements__img').setAttribute('alt', placeName);
+  placeImg.setAttribute('src', placeSrc);
+  placeImg.setAttribute('alt', placeName);
   placeCard.querySelector('.elements__title').textContent = placeName;
 
   placeImg.addEventListener('click', showBigImg);
