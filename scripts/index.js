@@ -18,10 +18,10 @@ function closePopup(popup) {
 }
 
 profileBtnEdit.addEventListener('click', function () {
-  openPopup(profilePopup);
-
   profileInputName.value = profileName.textContent.trim();
   profileInputAvocation.value = profileAvocation.textContent.trim();
+  
+  openPopup(profilePopup);
 });
 
 profileBtnClose.addEventListener('click', () => closePopup(profilePopup));
