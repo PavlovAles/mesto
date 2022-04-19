@@ -17,6 +17,7 @@ function openPopup(popup) {
 
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
+
 }
 
 profileBtnEdit.addEventListener("click", function () {
@@ -82,6 +83,7 @@ const initialCards = [
 initialCards.forEach((item) => renderPlaceCard(item.name, item.link));
 
 placeBtnAdd.addEventListener("click", () => openPopup(placePopup));
+
 placeBtnClose.addEventListener("click", () => closePopup(placePopup));
 
 function renderPlaceCard(placeName, placeSrc) {
@@ -131,6 +133,5 @@ function placeFormSubmitHandler(evt) {
 
   renderPlaceCard(placeInputName.value, placeInputSrc.value);
   closePopup(placePopup);
-  placeInputName.value = "";
-  placeInputSrc.value = "";
+  placeForm.reset()
 }
