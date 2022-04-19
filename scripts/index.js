@@ -10,6 +10,8 @@ const profileInputAvocation = profileForm.querySelector("#avocation");
 const profileBtnClose = profilePopup.querySelector(".popup__btn-close");
 
 function openPopup(popup) {
+  const button = popup.querySelector('.popup__btn-save');
+  button.classList.add('popup__btn-save_disabled');
   popup.classList.add("popup_opened");
 }
 
