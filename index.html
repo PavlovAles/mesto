@@ -32,58 +32,76 @@
       <div class="popup popup_contains_profile-form">
         <div class="popup__container">
           <button class="popup__btn-close" type="button"></button>
-          <form name="profile-form" class="popup__form">
+          <form name="profile-form" class="popup__form" novalidate>
             <h2 class="popup__heading">Редактировать профиль</h2>
             <fieldset class="popup__input-container">
-              <input
-                type="text"
-                id="name"
-                name="name"
-                placeholder="Имя"
-                required
-                autocomplete="off"
-                class="popup__form-item"
-              />
-              <input
-                type="text"
-                id="avocation"
-                name="avocation"
-                placeholder="Призвание"
-                required
-                autocomplete="off"
-                class="popup__form-item"
-              />
+              <label class="popup__form-field">
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Имя"
+                  minlength="2"
+                  maxlength="40"
+                  required
+                  autocomplete="off"
+                  class="popup__form-item"
+                />
+                <p class="popup__input-error name-error">error-message</p>
+              </label>
+              <label class="popup__form-field">
+                <input
+                  type="text"
+                  id="avocation"
+                  name="avocation"
+                  placeholder="Призвание"
+                  minlength="2"
+                  maxlength="200"
+                  required
+                  autocomplete="off"
+                  class="popup__form-item"
+                />
+                <p class="popup__input-error avocation-error">error-message</p>
+              </label>
+              <button class="popup__btn-save" type="submit">Сохранить</button>
             </fieldset>
-            <button class="popup__btn-save" type="submit">Сохранить</button>
           </form>
         </div>
       </div>
       <div class="popup popup_contains_place-form">
         <div class="popup__container">
           <button class="popup__btn-close" type="button"></button>
-          <form name="place-form" class="popup__form">
+          <form name="place-form" class="popup__form" novalidate>
             <h2 class="popup__heading">Новое место</h2>
             <fieldset class="popup__input-container">
-              <input
-                type="text"
-                id="place-name"
-                name="place-name"
-                placeholder="Название"
-                required
-                autocomplete="off"
-                class="popup__form-item"
-              />
-              <input
-                type="text"
-                id="place-src"
-                name="place-src"
-                placeholder="Ссылка на картинку"
-                required
-                autocomplete="off"
-                class="popup__form-item"
-              />
+              <label class="popup__form-field">
+                <input
+                  type="text"
+                  id="place-name"
+                  name="place-name"
+                  placeholder="Название"
+                  minlength="2"
+                  maxlength="30"
+                  required
+                  autocomplete="off"
+                  class="popup__form-item"
+                />
+                <p class="popup__input-error place-name-error">error-message</p>
+              </label>
+              <label class="popup__form-field">
+                <input
+                  type="url"
+                  id="place-src"
+                  name="place-src"
+                  placeholder="Ссылка на картинку"
+                  required
+                  autocomplete="off"
+                  class="popup__form-item"
+                />
+                <p class="popup__input-error place-src-error">error-message</p>
+              </label>
+              <button class="popup__btn-save" type="submit">Создать</button>
             </fieldset>
-            <button class="popup__btn-save" type="submit">Сохранить</button>
           </form>
         </div>
       </div>
@@ -108,5 +126,6 @@
       </li>
     </template>
     <script src="./scripts/index.js"></script>
+    <script src="./scripts/validate.js"></script>
   </body>
 </html>
