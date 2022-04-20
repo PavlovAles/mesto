@@ -1,4 +1,4 @@
-function enableValidation({ formSelector, fieldsetSelector, ...rest }) {
+const enableValidation = function ({ formSelector, fieldsetSelector, ...rest }) {
   const formList = Array.from(document.querySelectorAll(formSelector));
   formList.forEach((form) => {
     form.addEventListener("submit", (evt) => evt.preventDefault());
@@ -7,7 +7,7 @@ function enableValidation({ formSelector, fieldsetSelector, ...rest }) {
   });
 }
 
-function setEventListeners(
+const setEventListeners = function (
   fieldset,
   { inputSelector, submitButtonSelector, ...rest }
 ) {
@@ -22,7 +22,7 @@ function setEventListeners(
   });
 }
 
-function checkInputValidity(fieldset, inputElement, rest) {
+const checkInputValidity = function (fieldset, inputElement, rest) {
   if (!inputElement.validity.valid) {
     showInputError(
       fieldset,
@@ -35,7 +35,7 @@ function checkInputValidity(fieldset, inputElement, rest) {
   }
 }
 
-function showInputError(
+const showInputError = function (
   fieldset,
   inputElement,
   errorMessage,
@@ -47,7 +47,7 @@ function showInputError(
   errorElement.classList.add(errorClass);
 }
 
-function hideInputError(
+const hideInputError = function (
   fieldset,
   inputElement,
   { inputErrorClass, errorClass }
@@ -58,7 +58,7 @@ function hideInputError(
   errorElement.textContent = "";
 }
 
-function toggleButtonState(inputList, button, { inactiveButtonClass }) {
+const toggleButtonState = function (inputList, button, { inactiveButtonClass }) {
   if (hasInvalidInput(inputList)) {
     button.classList.add(inactiveButtonClass);
     button.setAttribute("disabled", "");
@@ -68,7 +68,7 @@ function toggleButtonState(inputList, button, { inactiveButtonClass }) {
   }
 }
 
-function hasInvalidInput(inputList) {
+const hasInvalidInput = function (inputList) {
   return inputList.some((input) => !input.validity.valid);
 }
 

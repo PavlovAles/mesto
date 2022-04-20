@@ -8,13 +8,13 @@ const profileForm = profilePopup.querySelector(".popup__form");
 const profileInputName = profileForm.querySelector("#name");
 const profileInputAvocation = profileForm.querySelector("#avocation");
 
-function showPopup(popup) {
+const showPopup = function (popup) {
   popup.classList.add("popup_opened");
   popup.addEventListener("click", closePopupByClick);
   document.addEventListener("keydown", closePopupByEsc);
 }
 
-function closePopupByEsc(evt) {
+const closePopupByEsc = function (evt) {
   if (evt.key === "Escape") {
     const popup = document.querySelector(".popup_opened");
     hidePopup(popup);
@@ -22,7 +22,7 @@ function closePopupByEsc(evt) {
   }
 }
 
-function closePopupByClick(evt) {
+const closePopupByClick = function (evt) {
   if (evt.target.classList.contains("popup__btn-close")) {
     const popup = evt.target.closest(".popup");
     hidePopup(popup);
@@ -35,19 +35,19 @@ function closePopupByClick(evt) {
   }
 }
 
-function hidePopup(popup) {
+const hidePopup = function (popup) {
   popup.classList.remove("popup_opened");
 
   const button = popup.querySelector(".popup__btn-save");
-  disableButton(button);
+  if (button) disableButton(button);
 }
 
-function disableButton(button) {
+const disableButton = function (button) {
   button.classList.add("popup__btn-save_disabled");
   button.setAttribute("disabled", "");
 }
 
-function profileFormSubmitHandler(evt) {
+const profileFormSubmitHandler = function (evt) {
   evt.preventDefault();
 
   profileName.textContent = profileInputName.value.trim();
@@ -105,16 +105,12 @@ const initialCards = [
   },
 ];
 
-initialCards.forEach((item) => renderPlaceCard(item.name, item.link));
-
-placeBtnAdd.addEventListener("click", () => showPopup(placePopup));
-
-function renderPlaceCard(placeName, placeSrc) {
+const renderPlaceCard = function (placeName, placeSrc) {
   const placeCard = preparePlaceCard(placeName, placeSrc);
   placesContainer.prepend(placeCard);
 }
 
-function preparePlaceCard(placeName, placeSrc) {
+const preparePlaceCard = function (placeName, placeSrc) {
   const placeCard = placeTemplate
     .querySelector(".elements__item")
     .cloneNode(true);
@@ -139,7 +135,7 @@ function preparePlaceCard(placeName, placeSrc) {
   return placeCard;
 }
 
-function showBigImg(placeName, placeSrc) {
+const showBigImg = function (placeName, placeSrc) {
   imgPopup.querySelector(".popup__img").setAttribute("src", placeSrc);
   imgPopup.querySelector(".popup__img").setAttribute("alt", placeName);
   imgPopup.querySelector(".popup__img-caption").textContent = placeName;
@@ -147,12 +143,16 @@ function showBigImg(placeName, placeSrc) {
   showPopup(imgPopup);
 }
 
-placeForm.addEventListener("submit", placeFormSubmitHandler);
-
-function placeFormSubmitHandler(evt) {
+const placeFormSubmitHandler = function (evt) {
   evt.preventDefault();
 
   renderPlaceCard(placeInputName.value, placeInputSrc.value);
   hidePopup(placePopup);
   placeForm.reset();
 }
+
+initialCards.forEach((item) => renderPlaceCard(item.name, item.link));
+
+placeBtnAdd.addEventListener("click", () => showPopup(placePopup));
+
+placeForm.addEventListener("submit", placeFormSubmitHandler);
