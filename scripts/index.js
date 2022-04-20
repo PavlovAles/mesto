@@ -11,14 +11,13 @@ const profileInputAvocation = profileForm.querySelector("#avocation");
 function openPopup(popup) {
   popup.classList.add("popup_opened");
   popup.addEventListener('click', closePopupByClick);
-  popup.addEventListener('keydown', closePopupByEsc);
+  document.addEventListener('keydown', closePopupByEsc);
 }
 
 function closePopupByEsc(evt) {
-  console.log(evt.key);
   if (evt.key === 'Escape') {
-    evt.target.closest('.popup').classList.remove("popup_opened");
-    evt.target.closest('.popup').removeEventListener('keydown', closePopupByEsc);
+    document.querySelector('.popup_opened').classList.remove("popup_opened");
+    document.removeEventListener('keydown', closePopupByEsc);
   }
 }
 
