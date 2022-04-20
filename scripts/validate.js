@@ -60,12 +60,20 @@ const hideInputError = function (
 
 const toggleButtonState = function (inputList, button, { inactiveButtonClass }) {
   if (hasInvalidInput(inputList)) {
-    button.classList.add(inactiveButtonClass);
-    button.setAttribute("disabled", "");
+    disableButton(button, inactiveButtonClass);
   } else {
-    button.classList.remove(inactiveButtonClass);
-    button.removeAttribute("disabled");
+    enableButton(button, inactiveButtonClass);
   }
+}
+
+const disableButton = function (button, inactiveButtonClass) {
+  button.classList.add(inactiveButtonClass);
+  button.setAttribute("disabled", "");
+}
+
+const enableButton = function (button, inactiveButtonClass) {
+  button.classList.remove(inactiveButtonClass);
+  button.removeAttribute("disabled", "");
 }
 
 const hasInvalidInput = function (inputList) {
