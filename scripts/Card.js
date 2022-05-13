@@ -1,4 +1,4 @@
-import { imgPopup, showPopup } from './popup.js';
+import { imgPopup, showPopup } from './utils.js';
 
 export class Card {
   constructor(placeName, placeSrc, templateSelector) {
@@ -25,12 +25,12 @@ export class Card {
 
   _setEventListeners() {
     this._element.querySelector('.elements__img').addEventListener('click', () => this._handleOpenPopup());
-    this._element.querySelector('.elements__btn-delete').addEventListener('click', (evt) => this._handleDeleteBtn(evt));
+    this._element.querySelector('.elements__btn-delete').addEventListener('click', (evt) => this._handleDeleteBtn());
     this._element.querySelector('.elements__btn-like').addEventListener('click', (evt) => this._handleLikeBtn(evt));
   }
 
-  _handleDeleteBtn(evt) {
-    evt.target.closest('.elements__item').remove();
+  _handleDeleteBtn() {
+    this._element.remove();
   }
 
   _handleLikeBtn(evt) {

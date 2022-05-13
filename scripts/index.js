@@ -1,6 +1,15 @@
 import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
-import { showPopup, hidePopup } from './popup.js';
+import { showPopup, hidePopup } from './utils.js';
+
+const selectors = {
+  fieldsetSelector: '.popup__input-container',
+  inputSelector: '.popup__form-item',
+  submitButtonSelector: '.popup__btn-save',
+  inactiveButtonClass: 'popup__btn-save_disabled',
+  inputErrorClass: 'popup__form-item_type_error',
+  errorClass: 'popup__input-error_active'
+}
 
 const profile = document.querySelector('.profile');
 const profileName = profile.querySelector('.profile__name');
@@ -8,6 +17,7 @@ const profileAvocation = profile.querySelector('.profile__avocation');
 const profileBtnEdit = profile.querySelector('.profile__btn-edit');
 const profilePopup = document.querySelector('.popup_contains_profile-form');
 const profileForm = profilePopup.querySelector('.popup__form');
+const profileFormValidator = new FormValidator(selectors, profileForm);
 const profileInputName = profileForm.querySelector('#name');
 const profileInputAvocation = profileForm.querySelector('#avocation');
 const profileBtnSave = profileForm.querySelector('.popup__btn-save');
@@ -16,6 +26,7 @@ const placesContainer = document.querySelector('.elements__list');
 const placeBtnAdd = document.querySelector('.profile__btn-add');
 const placePopup = document.querySelector('.popup_contains_place-form');
 const placeForm = placePopup.querySelector('.popup__form');
+const placeFormValidator = new FormValidator(selectors, placeForm);
 const placeInputName = placeForm.querySelector('#place-name');
 const placeInputSrc = placeForm.querySelector('#place-src');
 const placeBtnSave = placeForm.querySelector('.popup__btn-save');
@@ -54,8 +65,7 @@ const profileFormSubmitHandler = function (evt) {
   profileAvocation.textContent = profileInputAvocation.value.trim();
 
   hidePopup(profilePopup);
-  profileBtnSave.classList.add('popup__btn-save_disabled');
-  profileBtnSave.setAttribute('disabled', '');
+  profileFormValidator.disableButton(profileBtnSave);
 };
 
 const placeFormSubmitHandler = function (evt) {
@@ -64,8 +74,7 @@ const placeFormSubmitHandler = function (evt) {
   renderPlaceCard(placeInputName.value, placeInputSrc.value);
   hidePopup(placePopup);
   placeForm.reset();
-  placeBtnSave.classList.add('popup__btn-save_disabled');
-  placeBtnSave.setAttribute('disabled', '');
+  placeFormValidator.disableButton(placeBtnSave);
 };
 
 const renderPlaceCard = function (placeName, placeSrc) {
@@ -81,22 +90,11 @@ profileBtnEdit.addEventListener('click', function () {
 });
 
 profileForm.addEventListener('submit', profileFormSubmitHandler);
+profileFormValidator.enableValidation();
+
+placeForm.addEventListener('submit', placeFormSubmitHandler);
+placeFormValidator.enableValidation();
 
 placeBtnAdd.addEventListener('click', () => showPopup(placePopup));
 
-placeForm.addEventListener('submit', placeFormSubmitHandler);
-
 initialCards.forEach((item) => renderPlaceCard(item.name, item.link));
-
-const selectors = {
-  fieldsetSelector: '.popup__input-container',
-  inputSelector: '.popup__form-item',
-  submitButtonSelector: '.popup__btn-save',
-  inactiveButtonClass: 'popup__btn-save_disabled',
-  inputErrorClass: 'popup__form-item_type_error',
-  errorClass: 'popup__input-error_active'
-}
-Array.from(document.querySelectorAll('.popup__form')).forEach(form => {
-  const validator = new FormValidator(selectors, form);
-  validator.enableValidation()
-})
