@@ -4,7 +4,7 @@ export const validatorSelectors = {
   submitButtonSelector: '.popup__btn-save',
   inactiveButtonClass: 'popup__btn-save_disabled',
   inputErrorClass: 'popup__form-item_type_error',
-  errorClass: 'popup__input-error_active'
+  errorClass: 'popup__input-error'
 }
 
 const profile = document.querySelector('.profile');
