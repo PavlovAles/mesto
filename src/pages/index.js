@@ -39,15 +39,13 @@ const placesContainer = new Section(
 
 const popupWithCardForm = new PopupWithForm(
   {
-    submitHandler: (evt) => {
-      evt.preventDefault();
-      popupWithCardForm._getInputValues();
+    submitHandler: (formData) => {
       const card = new Card(
         function() {
           popupWithImage.open(this._placeName, this._placeSrc);
         },
-        popupWithCardForm._formValues['place-name'],
-        popupWithCardForm._formValues['place-src'],
+        formData['place-name'],
+        formData['place-src'],
         '#place-template'
       );
       const cardElement = card.generateCard();
@@ -61,10 +59,8 @@ const popupWithCardForm = new PopupWithForm(
 
 const popupWithUserForm = new PopupWithForm(
   {
-    submitHandler: (evt) => {
-      evt.preventDefault();
-      popupWithUserForm._getInputValues();
-      userInfo.setUserInfo(popupWithUserForm._formValues.name, popupWithUserForm._formValues.avocation);
+    submitHandler: (formData) => {
+      userInfo.setUserInfo(formData.name, formData.avocation);
       popupWithUserForm.close();
       profileFormValidator.disableButton();
     }
