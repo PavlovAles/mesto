@@ -53,7 +53,7 @@ const popupWithCardForm = new PopupWithForm(
       const cardElement = card.generateCard();
       placesContainer.setItem(cardElement);
       popupWithCardForm.close();
-      placeFormValidator.disableButton(placeBtnSave);
+      placeFormValidator.disableButton();
     }
   },
   '.popup_contains_place-form'
@@ -66,7 +66,7 @@ const popupWithUserForm = new PopupWithForm(
       popupWithUserForm._getInputValues();
       userInfo.setUserInfo(popupWithUserForm._formValues.name, popupWithUserForm._formValues.avocation);
       popupWithUserForm.close();
-      profileFormValidator.disableButton(profileBtnSave);
+      profileFormValidator.disableButton();
     }
   },
   '.popup_contains_profile-form'
@@ -90,10 +90,13 @@ profileBtnEdit.addEventListener('click', function () {
   let currentUserInfo = userInfo.getUserInfo();
   profileInputName.value = currentUserInfo.name.trim();
   profileInputAvocation.value = currentUserInfo.avocation.trim();
-
+  profileFormValidator.resetError();
   popupWithUserForm.open();
 });
 
-placeBtnAdd.addEventListener('click', () => popupWithCardForm.open());
+placeBtnAdd.addEventListener('click', () => {
+  placeFormValidator.resetError();
+  popupWithCardForm.open()
+});
 
 placesContainer.renderItems();
