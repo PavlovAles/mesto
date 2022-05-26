@@ -18,19 +18,24 @@ import {
   profileInputAvocation,
 } from '../utils/constants.js';
 
+function generateNewCard(name, link) {
+  const card = new Card(
+    function() {
+      popupWithImage.open(this._placeName, this._placeSrc);
+    },
+    name,
+    link,
+    '#place-template'
+  );
+
+  return card.generateCard();
+}
+
 const placesContainer = new Section(
   {
     data: initialCards,
     renderer: (item) => {
-      const card = new Card(
-        function() {
-          popupWithImage.open(this._placeName, this._placeSrc);
-        },
-        item.name,
-        item.link,
-        '#place-template'
-      );
-      const cardElement = card.generateCard();
+      const cardElement = generateNewCard(item.name, item.link);
       placesContainer.setItem(cardElement);
     }
   },
@@ -40,15 +45,7 @@ const placesContainer = new Section(
 const popupWithCardForm = new PopupWithForm(
   {
     submitHandler: (formData) => {
-      const card = new Card(
-        function() {
-          popupWithImage.open(this._placeName, this._placeSrc);
-        },
-        formData['place-name'],
-        formData['place-src'],
-        '#place-template'
-      );
-      const cardElement = card.generateCard();
+      const cardElement = generateNewCard(formData['place-name'], formData['place-src']);
       placesContainer.setItem(cardElement);
       popupWithCardForm.close();
       placeFormValidator.disableButton();
