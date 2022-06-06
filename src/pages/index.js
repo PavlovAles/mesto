@@ -12,6 +12,8 @@ import {
   placeBtnAdd,
   placeBtnSave,
   profileForm,
+  avatarForm,
+  avatarBtnEdit,
   profileBtnEdit,
   profileBtnSave,
   profileInputName,
@@ -65,19 +67,35 @@ const popupWithUserForm = new PopupWithForm(
   '.popup_contains_profile-form'
 )
 
+const popupWithAvatarForm = new PopupWithForm(
+  {
+    submitHandler: function(){}
+  },
+  '.popup_contains_avatar-form'
+)
+
 const popupWithImage = new PopupWithImage('.popup_contains_big-img');
 
 const userInfo = new UserInfo( {nameSelector: '.profile__name', avocationSelector: '.profile__avocation'} );
 
 popupWithCardForm.setEventListeners();
 popupWithUserForm.setEventListeners();
+popupWithAvatarForm.setEventListeners();
 popupWithImage.setEventListeners();
 
 const placeFormValidator = new FormValidator(validatorSelectors, placeForm);
 placeFormValidator.enableValidation();
 
+const avatarFormValidator = new FormValidator(validatorSelectors, avatarForm);
+avatarFormValidator.enableValidation();
+
 const profileFormValidator = new FormValidator(validatorSelectors, profileForm);
 profileFormValidator.enableValidation();
+
+avatarBtnEdit.addEventListener('click', function() {
+  avatarFormValidator.resetError();
+  popupWithAvatarForm.open();
+});
 
 profileBtnEdit.addEventListener('click', function () {
   let currentUserInfo = userInfo.getUserInfo();

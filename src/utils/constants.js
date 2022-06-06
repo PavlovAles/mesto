@@ -9,6 +9,8 @@ export const validatorSelectors = {
 
 const profile = document.querySelector('.profile');
 const profilePopup = document.querySelector('.popup_contains_profile-form');
+export const avatarBtnEdit = profile.querySelector('.profile__avatar-container');
+export const avatarForm = document.querySelector('.popup_contains_avatar-form .popup__form');
 export const profileBtnEdit = profile.querySelector('.profile__btn-edit');
 export const profileForm = profilePopup.querySelector('.popup__form');
 export const profileInputName = profileForm.querySelector('#name');
