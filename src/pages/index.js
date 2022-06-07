@@ -41,13 +41,12 @@ function loadInitialState() {
     .catch( err => console.log(err) )
 }
 
-function generateNewCard(name, link) {
+function generateNewCard(item) {
   const card = new Card(
     function() {
-      popupWithImage.open(this._placeName, this._placeSrc);
+      popupWithImage.open(this._card.name, this._card.link);
     },
-    name,
-    link,
+    item,
     '#place-template'
   );
 
@@ -56,7 +55,7 @@ function generateNewCard(name, link) {
 
 const placesContainer = new Section(
   (item) => {
-    const cardElement = generateNewCard(item.name, item.link);
+    const cardElement = generateNewCard(item);
     placesContainer.setItem(cardElement);
   },
   '.elements__list'
@@ -68,7 +67,7 @@ const popupWithCardForm = new PopupWithForm(
       popupWithCardForm.showSavingState(true);
       api.postCard({name: formData['place-name'], link: formData['place-src']})
         .then( res => {
-          const cardElement = generateNewCard(res.name, res.link);
+          const cardElement = generateNewCard(res);
           placesContainer.setItem(cardElement);
         })
         .catch( err => console.log(err))
