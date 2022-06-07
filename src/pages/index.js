@@ -12,6 +12,7 @@ import {
   placeForm,
   placeBtnAdd,
   placeBtnSave,
+  profile,
   profileForm,
   avatarForm,
   avatarBtnEdit,
@@ -20,6 +21,27 @@ import {
   profileInputName,
   profileInputAvocation,
 } from '../utils/constants.js';
+
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-43',
+  headers: {
+    authorization: '027aae2a-5213-4a55-9b05-c413b1c6bf00',
+    'Content-Type': 'application/json'
+  }
+});
+
+function loadInitialState() {
+  profile.classList.add('profile_hidden');
+  api.getInitialInfo()
+    .then( data => {
+      userInfo.setAvatar(data[0].avatar);
+      userInfo.setUserInfo(data[0].name, data[0].about);
+      placesContainer.renderItems(data[1]);
+      profile.classList.remove('profile_hidden');
+    })
+    .catch( err => console.log(err) )
+}
+
 
 function generateNewCard(name, link) {
   const card = new Card(
@@ -35,15 +57,12 @@ function generateNewCard(name, link) {
 }
 
 const placesContainer = new Section(
-  {
-    data: initialCards,
-    renderer: (item) => {
-      const cardElement = generateNewCard(item.name, item.link);
-      placesContainer.setItem(cardElement);
-    }
+  (item) => {
+    const cardElement = generateNewCard(item.name, item.link);
+    placesContainer.setItem(cardElement);
   },
   '.elements__list'
-);
+  );
 
 const popupWithCardForm = new PopupWithForm(
   {
@@ -86,14 +105,6 @@ const popupWithUserForm = new PopupWithForm(
   '.popup__btn-save'
 )
 
-const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-43',
-  headers: {
-    authorization: '027aae2a-5213-4a55-9b05-c413b1c6bf00',
-    'Content-Type': 'application/json'
-  }
-});
-
 const popupWithAvatarForm = new PopupWithForm(
   {
     submitHandler: (formData) => {
@@ -118,15 +129,7 @@ const userInfo = new UserInfo( {
   avatarSelector: '.profile__avatar'
 } );
 
-api.getInitialInfo()
-  .then( data => {
-    userInfo.setAvatar(data[0].avatar)
-    userInfo.setUserInfo(data[0].name, data[0].about)
-  })
-  .catch( err => console.log(err))
-
 const popupWithImage = new PopupWithImage('.popup_contains_big-img');
-
 
 popupWithCardForm.setEventListeners();
 popupWithUserForm.setEventListeners();
@@ -160,4 +163,4 @@ placeBtnAdd.addEventListener('click', () => {
   popupWithCardForm.open()
 });
 
-placesContainer.renderItems();
+loadInitialState();
