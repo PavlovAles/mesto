@@ -11,11 +11,11 @@ export default class User {
     this._renderInfo();
   }
 
-  getUserInfo() {
+  getInfo() {
     return {name: this._user.name, avocation: this._user.about}
   }
 
-  getUserId() {
+  getId() {
     return this._user._id;
   }
 
@@ -24,7 +24,7 @@ export default class User {
     this._renderAvatar();
   }
 
-  setUserInfo(name, avocation) {
+  setInfo(name, avocation) {
     this._user.name = name;
     this._user.about = avocation;
     this._renderInfo();

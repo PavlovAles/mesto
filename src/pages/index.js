@@ -30,7 +30,7 @@ const api = new Api({
   }
 });
 
-function loadInitialState() {
+function loadInitialData() {
   profile.classList.add('profile_hidden');
   api.getInitialInfo()
     .then( data => {
@@ -88,7 +88,7 @@ const popupWithUserForm = new PopupWithForm(
       popupWithUserForm.showSavingState(true);
       api.editProfile({name: formData.name, about: formData.avocation})
         .then( res => {
-          user.setUserInfo(res.name, res.about);
+          user.setInfo(res.name, res.about);
         })
         .catch( err => console.log(err))
         .finally( _ => {
@@ -148,7 +148,7 @@ avatarBtnEdit.addEventListener('click', function() {
 });
 
 profileBtnEdit.addEventListener('click', function () {
-  let currentUserInfo = user.getUserInfo();
+  let currentUserInfo = user.getInfo();
   profileInputName.value = currentUserInfo.name.trim();
   profileInputAvocation.value = currentUserInfo.avocation.trim();
   profileFormValidator.resetError();
@@ -160,4 +160,4 @@ placeBtnAdd.addEventListener('click', () => {
   popupWithCardForm.open()
 });
 
-loadInitialState();
+loadInitialData();
