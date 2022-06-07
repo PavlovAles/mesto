@@ -5,7 +5,7 @@ export default class Card {
     this._templateSelector = templateSelector;
   }
 
-  generateCard() {
+  generateCard(userId) {
     this._element = this._getTemplate();
     this._image = this._element.querySelector('.elements__img');
 
@@ -14,7 +14,7 @@ export default class Card {
     this._image.setAttribute('src', this._card.link);
     this._image.setAttribute('alt', this._card.name);
     this._element.querySelector('.elements__title').textContent = this._card.name;
-
+    if (this._card.owner._id !== userId) this._element.querySelector('.elements__btn-delete').classList.add('elements__btn-delete_hidden')
     return this._element;
   }
 
