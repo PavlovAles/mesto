@@ -48,18 +48,28 @@ const placesContainer = new Section(
 const popupWithCardForm = new PopupWithForm(
   {
     submitHandler: (formData) => {
-      const cardElement = generateNewCard(formData['place-name'], formData['place-src']);
-      placesContainer.setItem(cardElement);
-      popupWithCardForm.close();
-      placeFormValidator.disableButton();
+      popupWithCardForm.showSavingState(true);
+      api.postCard({name: formData['place-name'], link: formData['place-src']})
+        .then( res => {
+          const cardElement = generateNewCard(res.name, res.link);
+          placesContainer.setItem(cardElement);
+        })
+        .catch( err => console.log(err))
+        .finally( _ => {
+          popupWithCardForm.close();
+          placeFormValidator.disableButton();
+          popupWithCardForm.showSavingState(false, 'Создать')
+        })
     }
   },
-  '.popup_contains_place-form'
+  '.popup_contains_place-form',
+  '.popup__btn-save'
 );
 
 const popupWithUserForm = new PopupWithForm(
   {
     submitHandler: (formData) => {
+      popupWithUserForm.showSavingState(true);
       api.editProfile({name: formData.name, about: formData.avocation})
         .then( res => {
           userInfo.setUserInfo(res.name, res.about);
@@ -68,10 +78,12 @@ const popupWithUserForm = new PopupWithForm(
         .finally( _ => {
           popupWithUserForm.close();
           profileFormValidator.disableButton();
+          popupWithAvatarForm.showSavingState(false, 'Сохранить');
         })
     }
   },
-  '.popup_contains_profile-form'
+  '.popup_contains_profile-form',
+  '.popup__btn-save'
 )
 
 const api = new Api({
@@ -85,13 +97,21 @@ const api = new Api({
 const popupWithAvatarForm = new PopupWithForm(
   {
     submitHandler: (formData) => {
+      popupWithAvatarForm.showSavingState(true);
       api.editAvatar( {avatar: formData['avatar-src']} )
-        .then( res => avatar.setAttribute('src', res.avatar))
+        .then( res => userInfo.setAvatar(res.avatar))
         .catch( err => console.log(err))
+        .finally( _ => {
+          popupWithAvatarForm.close();
+          avatarFormValidator.disableButton();
+          popupWithAvatarForm.showSavingState(false, 'Сохранить');
+        })
     }
   },
-  '.popup_contains_avatar-form'
+  '.popup_contains_avatar-form',
+  '.popup__btn-save'
 )
+
 const userInfo = new UserInfo( {
   nameSelector: '.profile__name',
   avocationSelector: '.profile__avocation',
