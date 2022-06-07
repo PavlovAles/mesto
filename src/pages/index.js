@@ -5,7 +5,7 @@ import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
-import UserInfo from '../components/UserInfo.js';
+import User from '../components/User.js';
 import {
   initialCards,
   validatorSelectors,
@@ -34,14 +34,12 @@ function loadInitialState() {
   profile.classList.add('profile_hidden');
   api.getInitialInfo()
     .then( data => {
-      userInfo.setAvatar(data[0].avatar);
-      userInfo.setUserInfo(data[0].name, data[0].about);
+      user.setUser(data[0])
       placesContainer.renderItems(data[1]);
       profile.classList.remove('profile_hidden');
     })
     .catch( err => console.log(err) )
 }
-
 
 function generateNewCard(name, link) {
   const card = new Card(
@@ -91,7 +89,7 @@ const popupWithUserForm = new PopupWithForm(
       popupWithUserForm.showSavingState(true);
       api.editProfile({name: formData.name, about: formData.avocation})
         .then( res => {
-          userInfo.setUserInfo(res.name, res.about);
+          user.setUserInfo(res.name, res.about);
         })
         .catch( err => console.log(err))
         .finally( _ => {
@@ -110,7 +108,7 @@ const popupWithAvatarForm = new PopupWithForm(
     submitHandler: (formData) => {
       popupWithAvatarForm.showSavingState(true);
       api.editAvatar( {avatar: formData['avatar-src']} )
-        .then( res => userInfo.setAvatar(res.avatar))
+        .then( res => user.setAvatar(res.avatar))
         .catch( err => console.log(err))
         .finally( _ => {
           popupWithAvatarForm.close();
@@ -123,7 +121,7 @@ const popupWithAvatarForm = new PopupWithForm(
   '.popup__btn-save'
 )
 
-const userInfo = new UserInfo( {
+const user = new User( {
   nameSelector: '.profile__name',
   avocationSelector: '.profile__avocation',
   avatarSelector: '.profile__avatar'
@@ -151,7 +149,7 @@ avatarBtnEdit.addEventListener('click', function() {
 });
 
 profileBtnEdit.addEventListener('click', function () {
-  let currentUserInfo = userInfo.getUserInfo();
+  let currentUserInfo = user.getUserInfo();
   profileInputName.value = currentUserInfo.name.trim();
   profileInputAvocation.value = currentUserInfo.avocation.trim();
   profileFormValidator.resetError();
