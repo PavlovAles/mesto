@@ -1,7 +1,8 @@
 export default class Card {
-  constructor( {handleCardClick, handleLikeBtn, card, templateSelector} ) {
+  constructor( {handleCardClick, handleLikeBtn, handleDeleteBtn, card, templateSelector} ) {
     this._handleCardClick = handleCardClick;
     this._handleLikeBtn = handleLikeBtn;
+    this._handleDeleteBtn = handleDeleteBtn;
     this._card = card;
     this._templateSelector = templateSelector;
   }
@@ -28,7 +29,7 @@ export default class Card {
   }
 
   checkLike() {
-    return this._card.likes.some( item => JSON.stringify(item) === JSON.stringify(this._card.owner) )
+    return this._card.likes.some( item => item._id === this._card.owner._id)
   }
 
   _getTemplate() {
@@ -42,10 +43,10 @@ export default class Card {
     this._element.querySelector('.elements__btn-like').addEventListener('click', (evt) => this._handleLikeBtn(evt));
   }
 
-  _handleDeleteBtn() {
-    this._element.remove();
-    this._element = null;
-  }
+  // _handleDeleteBtn() {
+  //   this._element.remove();
+  //   this._element = null;
+  // }
 
   _renderLikes() {
     this.checkLike() ?
