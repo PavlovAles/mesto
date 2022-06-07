@@ -21,6 +21,7 @@ import {
   profileInputName,
   profileInputAvocation,
 } from '../utils/constants.js';
+import Popup from '../components/Popup';
 
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-43',
@@ -57,6 +58,9 @@ function generateNewCard(item, userId) {
           .catch( err => console.log(err) );
       }
     },
+    handleDeleteBtn: function() {
+      popupWithConfirmation.open();
+    },
     card: item,
     templateSelector: '#place-template'
   });
@@ -89,8 +93,7 @@ const popupWithCardForm = new PopupWithForm(
         })
     }
   },
-  '.popup_contains_place-form',
-  '.popup__btn-save'
+  '.popup_contains_place-form'
 );
 
 const popupWithUserForm = new PopupWithForm(
@@ -109,8 +112,7 @@ const popupWithUserForm = new PopupWithForm(
         })
     }
   },
-  '.popup_contains_profile-form',
-  '.popup__btn-save'
+  '.popup_contains_profile-form'
 )
 
 const popupWithAvatarForm = new PopupWithForm(
@@ -127,9 +129,10 @@ const popupWithAvatarForm = new PopupWithForm(
         })
     }
   },
-  '.popup_contains_avatar-form',
-  '.popup__btn-save'
+  '.popup_contains_avatar-form'
 )
+
+const popupWithConfirmation = new Popup('.popup_contains_confirmation');
 
 const user = new User( {
   nameSelector: '.profile__name',
@@ -143,6 +146,7 @@ popupWithCardForm.setEventListeners();
 popupWithUserForm.setEventListeners();
 popupWithAvatarForm.setEventListeners();
 popupWithImage.setEventListeners();
+popupWithConfirmation.setEventListeners();
 
 const placeFormValidator = new FormValidator(validatorSelectors, placeForm);
 placeFormValidator.enableValidation();
