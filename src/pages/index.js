@@ -5,23 +5,20 @@ import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
 import User from '../components/User.js';
 import {
-  initialCards,
   validatorSelectors,
   placeForm,
   placeBtnAdd,
-  placeBtnSave,
-  profile,
-  profileForm,
   avatarForm,
   avatarBtnEdit,
+  profile,
+  profileForm,
   profileBtnEdit,
-  profileBtnSave,
   profileInputName,
-  profileInputAvocation,
+  profileInputAvocation
 } from '../utils/constants.js';
-import Popup from '../components/Popup';
 
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-43',
@@ -36,7 +33,7 @@ function loadInitialData() {
   api.getInitialInfo()
     .then( data => {
       user.setUser(data[0])
-      placesContainer.renderItems(data[1]);
+      placesContainer.renderItems( data[1].reverse() ) ;
       profile.classList.remove('profile_hidden');
     })
     .catch( err => console.log(err) )
@@ -45,24 +42,25 @@ function loadInitialData() {
 function generateNewCard(item, userId) {
   const card = new Card({
     handleCardClick: function() {
-      popupWithImage.open(this._card.name, this._card.link);
+      popupWithImage.open( this.getInfo() );
     },
-    handleLikeBtn: function(evt) {
-      if ( this.checkLike() ) {
-        api.dislikeCard(this._card._id)
-          .then( res => this.setLikes(res.likes))
+    handleLikeBtn: function() {
+      if ( this.isLiked() ) {
+        api.dislikeCard( this.getId() )
+          .then( res => this.setLikes(res.likes) )
           .catch( err => console.log(err) );
       } else {
-        api.likeCard(this._card._id)
-          .then( res => this.setLikes(res.likes))
+        api.likeCard( this.getId() )
+          .then( res => this.setLikes(res.likes) )
           .catch( err => console.log(err) );
       }
     },
     handleDeleteBtn: function() {
-      popupWithConfirmation.open();
+      popupWithConfirmation.open(this);
     },
     card: item,
-    templateSelector: '#place-template'
+    templateSelector: '#place-template',
+    userId: user.getId()
   });
 
   return card.generateCard(userId);
@@ -85,15 +83,15 @@ const popupWithCardForm = new PopupWithForm(
           const cardElement = generateNewCard(res, user.getId());
           placesContainer.setItem(cardElement);
         })
-        .catch( err => console.log(err))
+        .catch( err => console.log(err) )
         .finally( _ => {
           popupWithCardForm.close();
           placeFormValidator.disableButton();
           popupWithCardForm.showSavingState(false, 'Создать')
         })
-    }
-  },
-  '.popup_contains_place-form'
+    },
+    popupSelector: '.popup_contains_place-form'
+  }
 );
 
 const popupWithUserForm = new PopupWithForm(
@@ -104,15 +102,15 @@ const popupWithUserForm = new PopupWithForm(
         .then( res => {
           user.setInfo(res.name, res.about);
         })
-        .catch( err => console.log(err))
+        .catch( err => console.log(err) )
         .finally( _ => {
           popupWithUserForm.close();
           profileFormValidator.disableButton();
           popupWithAvatarForm.showSavingState(false, 'Сохранить');
         })
-    }
-  },
-  '.popup_contains_profile-form'
+    },
+    popupSelector: '.popup_contains_profile-form'
+  }
 )
 
 const popupWithAvatarForm = new PopupWithForm(
@@ -120,27 +118,39 @@ const popupWithAvatarForm = new PopupWithForm(
     submitHandler: (formData) => {
       popupWithAvatarForm.showSavingState(true);
       api.editAvatar( {avatar: formData['avatar-src']} )
-        .then( res => user.setAvatar(res.avatar))
-        .catch( err => console.log(err))
+        .then( res => user.setAvatar(res.avatar) )
+        .catch( err => console.log(err) )
         .finally( _ => {
           popupWithAvatarForm.close();
           avatarFormValidator.disableButton();
           popupWithAvatarForm.showSavingState(false, 'Сохранить');
         })
-    }
-  },
-  '.popup_contains_avatar-form'
+    },
+    popupSelector: '.popup_contains_avatar-form'
+  }
 )
 
-const popupWithConfirmation = new Popup('.popup_contains_confirmation');
+const popupWithConfirmation = new PopupWithConfirmation(
+  {
+    submitHandler: function() {
+      api.deleteCard( this.card.getId() )
+      .then( () => {
+        this.close();
+        this.card.deleteCard();
+      })
+      .catch( err => console.log(err) )
+    },
+    popupSelector: '.popup_contains_confirmation'
+  }
+);
 
-const user = new User( {
+const popupWithImage = new PopupWithImage('.popup_contains_big-img');
+
+const user = new User({
   nameSelector: '.profile__name',
   avocationSelector: '.profile__avocation',
   avatarSelector: '.profile__avatar'
-} );
-
-const popupWithImage = new PopupWithImage('.popup_contains_big-img');
+});
 
 popupWithCardForm.setEventListeners();
 popupWithUserForm.setEventListeners();
@@ -157,12 +167,12 @@ avatarFormValidator.enableValidation();
 const profileFormValidator = new FormValidator(validatorSelectors, profileForm);
 profileFormValidator.enableValidation();
 
-avatarBtnEdit.addEventListener('click', function() {
+avatarBtnEdit.addEventListener('click', () => {
   avatarFormValidator.resetError();
   popupWithAvatarForm.open();
 });
 
-profileBtnEdit.addEventListener('click', function () {
+profileBtnEdit.addEventListener('click', () => {
   let currentUserInfo = user.getInfo();
   profileInputName.value = currentUserInfo.name.trim();
   profileInputAvocation.value = currentUserInfo.avocation.trim();
