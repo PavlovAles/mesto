@@ -42,13 +42,24 @@ function loadInitialData() {
 }
 
 function generateNewCard(item, userId) {
-  const card = new Card(
-    function() {
+  const card = new Card({
+    handleCardClick: function() {
       popupWithImage.open(this._card.name, this._card.link);
     },
-    item,
-    '#place-template'
-  );
+    handleLikeBtn: function(evt) {
+      if ( this.checkLike() ) {
+        api.dislikeCard(this._card._id)
+          .then( res => this.setLikes(res.likes))
+          .catch( err => console.log(err) );
+      } else {
+        api.likeCard(this._card._id)
+          .then( res => this.setLikes(res.likes))
+          .catch( err => console.log(err) );
+      }
+    },
+    card: item,
+    templateSelector: '#place-template'
+  });
 
   return card.generateCard(userId);
 }
