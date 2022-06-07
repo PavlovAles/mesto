@@ -7,8 +7,8 @@ export const validatorSelectors = {
   errorClass: 'popup__input-error'
 }
 
-const profile = document.querySelector('.profile');
 const profilePopup = document.querySelector('.popup_contains_profile-form');
+export const profile = document.querySelector('.profile');
 export const avatarBtnEdit = profile.querySelector('.profile__avatar-container');
 export const avatarForm = document.querySelector('.popup_contains_avatar-form .popup__form');
 export const profileBtnEdit = profile.querySelector('.profile__btn-edit');
