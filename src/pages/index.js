@@ -82,11 +82,11 @@ const popupWithCardForm = new PopupWithForm(
         .then( res => {
           const cardElement = generateNewCard(res, user.getId());
           placesContainer.setItem(cardElement);
+          popupWithCardForm.close();
+          placeFormValidator.disableButton();
         })
         .catch( err => console.log(err) )
         .finally( _ => {
-          popupWithCardForm.close();
-          placeFormValidator.disableButton();
           popupWithCardForm.showSavingState(false, 'Создать')
         })
     },
@@ -101,11 +101,11 @@ const popupWithUserForm = new PopupWithForm(
       api.editProfile({name: formData.name, about: formData.avocation})
         .then( res => {
           user.setInfo(res.name, res.about);
+          popupWithUserForm.close();
+          profileFormValidator.disableButton();
         })
         .catch( err => console.log(err) )
         .finally( _ => {
-          popupWithUserForm.close();
-          profileFormValidator.disableButton();
           popupWithAvatarForm.showSavingState(false, 'Сохранить');
         })
     },
@@ -118,11 +118,14 @@ const popupWithAvatarForm = new PopupWithForm(
     submitHandler: (formData) => {
       popupWithAvatarForm.showSavingState(true);
       api.editAvatar( {avatar: formData['avatar-src']} )
-        .then( res => user.setAvatar(res.avatar) )
-        .catch( err => console.log(err) )
-        .finally( _ => {
+        .then( res => {
+          user.setAvatar(res.avatar);
           popupWithAvatarForm.close();
           avatarFormValidator.disableButton();
+        })
+        .catch( err => console.log(err) )
+        .finally( _ => {
+
           popupWithAvatarForm.showSavingState(false, 'Сохранить');
         })
     },
