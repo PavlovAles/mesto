@@ -85,7 +85,9 @@ const popupWithCardForm = new PopupWithForm(
           popupWithCardForm.close();
           placeFormValidator.disableButton();
         })
-        .catch( err => console.log(err) )
+        .catch( errJson =>
+          errJson.then( err => popupWithCardForm.showResponseError(err.message) )
+        )
         .finally( _ => {
           popupWithCardForm.showSavingState(false, 'Создать')
         })
@@ -104,7 +106,9 @@ const popupWithUserForm = new PopupWithForm(
           popupWithUserForm.close();
           profileFormValidator.disableButton();
         })
-        .catch( err => console.log(err) )
+        .catch( errJson =>
+          errJson.then( err => popupWithUserForm.showResponseError(err.message) )
+        )
         .finally( _ => {
           popupWithAvatarForm.showSavingState(false, 'Сохранить');
         })
@@ -123,7 +127,9 @@ const popupWithAvatarForm = new PopupWithForm(
           popupWithAvatarForm.close();
           avatarFormValidator.disableButton();
         })
-        .catch( err => console.log(err) )
+        .catch( errJson =>
+          errJson.then( err => popupWithAvatarForm.showResponseError(err.message) )
+        )
         .finally( _ => {
 
           popupWithAvatarForm.showSavingState(false, 'Сохранить');

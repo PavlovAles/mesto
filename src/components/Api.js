@@ -25,7 +25,7 @@ export default class Api {
       if (res.ok) {
         return res.json();
       }
-      return Promise.reject(`Ошибка: ${res.status}`);
+      return Promise.reject(res.json());
     });
   }
 
@@ -38,7 +38,7 @@ export default class Api {
       if (res.ok) {
         return res.json();
       }
-      return Promise.reject(`Ошибка: ${res.status}`);
+      return Promise.reject(res.json());
     });
   }
 
@@ -63,7 +63,7 @@ export default class Api {
       if (res.ok) {
         return res.json();
       }
-      return Promise.reject(`Ошибка: ${res.status}`);
+      return Promise.reject(res.json());
     });
   }
 
