@@ -1,0 +1,10 @@
+.popup__response-error {
+  margin: 0 0 6px;
+  font-size: 12px;
+  line-height: 1.25;
+  position: absolute;
+  left: 0;
+  top: calc(100% + 4px);
+  opacity: 0;
+  color: red;
+}

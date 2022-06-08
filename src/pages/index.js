@@ -82,13 +82,11 @@ const popupWithCardForm = new PopupWithForm(
         .then( res => {
           const cardElement = generateNewCard(res, user.getId());
           placesContainer.setItem(cardElement);
-        })
-        .catch( err => console.log(err) )
-        .finally( _ => {
           popupWithCardForm.close();
-          placeFormValidator.disableButton();
-          popupWithCardForm.showSavingState(false, 'Создать')
         })
+        .catch( errJson =>
+          errJson.then( err => popupWithCardForm.showResponseError(err.message) )
+        )
     },
     popupSelector: '.popup_contains_place-form'
   }
@@ -101,13 +99,11 @@ const popupWithUserForm = new PopupWithForm(
       api.editProfile({name: formData.name, about: formData.avocation})
         .then( res => {
           user.setInfo(res.name, res.about);
-        })
-        .catch( err => console.log(err) )
-        .finally( _ => {
           popupWithUserForm.close();
-          profileFormValidator.disableButton();
-          popupWithAvatarForm.showSavingState(false, 'Сохранить');
         })
+        .catch( errJson =>
+          errJson.then( err => popupWithUserForm.showResponseError(err.message) )
+        )
     },
     popupSelector: '.popup_contains_profile-form'
   }
@@ -118,13 +114,13 @@ const popupWithAvatarForm = new PopupWithForm(
     submitHandler: (formData) => {
       popupWithAvatarForm.showSavingState(true);
       api.editAvatar( {avatar: formData['avatar-src']} )
-        .then( res => user.setAvatar(res.avatar) )
-        .catch( err => console.log(err) )
-        .finally( _ => {
+        .then( res => {
+          user.setAvatar(res.avatar);
           popupWithAvatarForm.close();
-          avatarFormValidator.disableButton();
-          popupWithAvatarForm.showSavingState(false, 'Сохранить');
         })
+        .catch( errJson =>
+          errJson.then( err => popupWithAvatarForm.showResponseError(err.message) )
+        )
     },
     popupSelector: '.popup_contains_avatar-form'
   }
@@ -169,6 +165,8 @@ profileFormValidator.enableValidation();
 
 avatarBtnEdit.addEventListener('click', () => {
   avatarFormValidator.resetError();
+  avatarFormValidator.disableButton();
+  popupWithAvatarForm.showSavingState(false, 'Сохранить');
   popupWithAvatarForm.open();
 });
 
@@ -177,11 +175,15 @@ profileBtnEdit.addEventListener('click', () => {
   profileInputName.value = currentUserInfo.name.trim();
   profileInputAvocation.value = currentUserInfo.avocation.trim();
   profileFormValidator.resetError();
+  profileFormValidator.disableButton();
+  popupWithUserForm.showSavingState(false, 'Сохранить');
   popupWithUserForm.open();
 });
 
 placeBtnAdd.addEventListener('click', () => {
   placeFormValidator.resetError();
+  placeFormValidator.disableButton();
+  popupWithCardForm.showSavingState(false, 'Создать')
   popupWithCardForm.open()
 });
 
