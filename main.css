@@ -34,9 +34,11 @@
 .popup__form{background-color:#fff;border-radius:10px;box-shadow:0 0 25px rgba(0,0,0,.15);box-sizing:border-box;color:#000;padding:34px 36px 37px;width:430px}@media (max-width:560px){.popup__form{padding:25px 22px;width:282px}}
 .popup__form-field{display:block;position:relative}.popup__form-field:first-of-type{margin-bottom:31px}.popup__form-field:last-of-type{margin-bottom:53px}@media (max-width:560px){.popup__form-field:last-of-type{margin-bottom:45px}}
 .popup__heading{font-size:24px;font-weight:900;line-height:1.21;margin:0 0 48px}@media (max-width:560px){.popup__heading{font-size:18px;line-height:1.22;margin-bottom:78px}}
-.popup__input-container{border:0;padding:0}
+.popup__input-container{border:0;padding:0;position:relative}
 .popup__input-error{color:red;font-size:12px;left:0;line-height:1.25;margin:0;opacity:0;position:absolute;top:calc(100% + 4px);transition:.3s}
 .popup__input-error_active{opacity:1}
+.popup__response-error{color:red;font-size:12px;left:0;line-height:1.25;margin:0 0 6px;opacity:0;position:absolute;top:calc(100% + 4px)}
+.popup__response-error_active{opacity:1}
 .popup__form-item{border-width:0;border-bottom:1px solid rgba(0,0,0,.2);box-sizing:border-box;font-family:inherit;font-size:14px;line-height:1.21;padding:0 0 5px;width:100%}.popup__form-item:focus{outline-color:rgba(0,0,0,.2)}.popup__form-item::-moz-placeholder{color:rgba(0,0,0,.2);font-family:inherit;font-size:14px;line-height:1.21}.popup__form-item:-ms-input-placeholder{color:rgba(0,0,0,.2);font-family:inherit;font-size:14px;line-height:1.21}.popup__form-item::placeholder{color:rgba(0,0,0,.2);font-family:inherit;font-size:14px;line-height:1.21}
 .popup__form-item_type_error{border-bottom:1px solid red}
 .popup__btn-save{background-color:#000;border-radius:2px;border-style:none;color:#fff;cursor:pointer;font-family:inherit;font-size:18px;height:50px;line-height:1.22;padding:0;transition:opacity .5s;width:100%}@media (max-width:560px){.popup__btn-save{font-size:14px;height:46px;line-height:1.21}}.popup__btn-save:focus{outline-color:rgba(0,0,0,.2);outline-width:2px}.popup__btn-save:hover{opacity:.8}
