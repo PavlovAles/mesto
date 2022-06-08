@@ -83,14 +83,10 @@ const popupWithCardForm = new PopupWithForm(
           const cardElement = generateNewCard(res, user.getId());
           placesContainer.setItem(cardElement);
           popupWithCardForm.close();
-          placeFormValidator.disableButton();
         })
         .catch( errJson =>
           errJson.then( err => popupWithCardForm.showResponseError(err.message) )
         )
-        .finally( _ => {
-          popupWithCardForm.showSavingState(false, 'Создать')
-        })
     },
     popupSelector: '.popup_contains_place-form'
   }
@@ -104,14 +100,10 @@ const popupWithUserForm = new PopupWithForm(
         .then( res => {
           user.setInfo(res.name, res.about);
           popupWithUserForm.close();
-          profileFormValidator.disableButton();
         })
         .catch( errJson =>
           errJson.then( err => popupWithUserForm.showResponseError(err.message) )
         )
-        .finally( _ => {
-          popupWithAvatarForm.showSavingState(false, 'Сохранить');
-        })
     },
     popupSelector: '.popup_contains_profile-form'
   }
@@ -125,15 +117,10 @@ const popupWithAvatarForm = new PopupWithForm(
         .then( res => {
           user.setAvatar(res.avatar);
           popupWithAvatarForm.close();
-          avatarFormValidator.disableButton();
         })
         .catch( errJson =>
           errJson.then( err => popupWithAvatarForm.showResponseError(err.message) )
         )
-        .finally( _ => {
-
-          popupWithAvatarForm.showSavingState(false, 'Сохранить');
-        })
     },
     popupSelector: '.popup_contains_avatar-form'
   }
@@ -178,6 +165,8 @@ profileFormValidator.enableValidation();
 
 avatarBtnEdit.addEventListener('click', () => {
   avatarFormValidator.resetError();
+  avatarFormValidator.disableButton();
+  popupWithAvatarForm.showSavingState(false, 'Сохранить');
   popupWithAvatarForm.open();
 });
 
@@ -186,11 +175,15 @@ profileBtnEdit.addEventListener('click', () => {
   profileInputName.value = currentUserInfo.name.trim();
   profileInputAvocation.value = currentUserInfo.avocation.trim();
   profileFormValidator.resetError();
+  profileFormValidator.disableButton();
+  popupWithUserForm.showSavingState(false, 'Сохранить');
   popupWithUserForm.open();
 });
 
 placeBtnAdd.addEventListener('click', () => {
   placeFormValidator.resetError();
+  placeFormValidator.disableButton();
+  popupWithCardForm.showSavingState(false, 'Создать')
   popupWithCardForm.open()
 });
 
