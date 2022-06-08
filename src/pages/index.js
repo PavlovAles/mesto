@@ -85,7 +85,10 @@ const popupWithCardForm = new PopupWithForm(
           popupWithCardForm.close();
         })
         .catch( errJson =>
-          errJson.then( err => popupWithCardForm.showResponseError(err.message) )
+          errJson.then( err => {
+            popupWithCardForm.showSavingState(false, 'Создать');
+            popupWithCardForm.showResponseError(err.message);
+          })
         )
     },
     popupSelector: '.popup_contains_place-form'
@@ -102,7 +105,10 @@ const popupWithUserForm = new PopupWithForm(
           popupWithUserForm.close();
         })
         .catch( errJson =>
-          errJson.then( err => popupWithUserForm.showResponseError(err.message) )
+          errJson.then( err => {
+            popupWithUserForm.showSavingState(false, 'Сохранить');
+            popupWithUserForm.showResponseError(err.message);
+          })
         )
     },
     popupSelector: '.popup_contains_profile-form'
@@ -119,7 +125,10 @@ const popupWithAvatarForm = new PopupWithForm(
           popupWithAvatarForm.close();
         })
         .catch( errJson =>
-          errJson.then( err => popupWithAvatarForm.showResponseError(err.message) )
+          errJson.then( err => {
+            popupWithAvatarForm.showSavingState(false, 'Сохранить');
+            popupWithAvatarForm.showResponseError(err.message);
+          })
         )
     },
     popupSelector: '.popup_contains_avatar-form'
